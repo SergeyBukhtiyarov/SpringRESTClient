@@ -23,7 +23,32 @@ public class Communication {
                 , new ParameterizedTypeReference<List<Employee>>() {});
         List<Employee> employeeList = responseEntity.getBody();
         return  employeeList;
+    }
 
+
+
+    public Employee getEmployee(int id) {
+        Employee employee = restTemplate.getForObject(URL + "/" + id, Employee.class);
+        return employee;
+    }
+
+
+    public void saveEmployee(Employee employee) {
+        int id = employee.getId();
+        if (id==0) {
+            ResponseEntity<String> responseEntity = restTemplate.postForEntity(URL,employee, String.class);
+            System.out.println("New Employee was added to DB");
+            System.out.println(responseEntity.getBody());
+        }else {
+            restTemplate.put(URL,employee);
+            System.out.println("Employee with id" + id + "was updated");
+
+        }
+    }
+
+    public void deleteEmployee(int id) {
+        restTemplate.delete(URL +"/"+ id);
+        System.out.println("Employee with id= " +id + "was deleted from DB!");
     }
 
 
