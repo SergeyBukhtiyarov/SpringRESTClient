@@ -12,6 +12,7 @@ import java.util.List;
 class SpringRestClientApplicationTests {
     @Autowired
     Communication communication;
+
     @Test
     void contextLoads() {
 
@@ -21,12 +22,13 @@ class SpringRestClientApplicationTests {
         Employee employee = communication.getEmployee(4);
         System.out.println(employee);
 
-
+        // save new
         Employee employee1 = new Employee();
         employee1.setName("Sveta");
         employee1.setSurname("Rodina");
         employee1.setDepartment("IT");
         employee1.setSalary(54321);
+        // update
         employee1.setId(10);
 
         communication.saveEmployee(employee1);
